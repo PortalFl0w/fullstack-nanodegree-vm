@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ restaurant.name }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>{{ restaurant.name }}</h1>
+        <h2><a class="button" href="{{ url_for('newMenuItem', restaurant_id=restaurant.id)}}">Add New Item</a></h2>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <ul class="flash">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+      {% endwith %}
+
+      <div class="menu-container">
+        {% for i in items %}
+        <ul class="menu-item">
+          <li class="menu-item-title">{{i.name}}</li>
+          <li class="menu-item-desc">{{i.description}}</li>
+          <li class="menu-item-price">{{i.price}}</li>
+          <li class="menu-item-buttons">
+            <a class="button" href="{{ url_for('editMenuItem', restaurant_id=restaurant.id, menu_id=i.id) }}">Edit</a>
+            <span> </span>
+            <a class="button" href="{{ url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_id=i.id) }}">Delete</a>
+          </li>
+        </ul>
+        {% endfor %}
+      </div>
+
+
+    </div>
+  </body>
+</html>
