@@ -2,20 +2,21 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Delete {{item.name}}</title>
+    <title>Delete Restaurant</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1>Are you sure you want to delete {{item.name}}?</h1>
+        <h1>Delete {{ restaurant.name }}?</h1>
       </div>
       <div class="form-wrapper">
-        <form action="{{url_for('deleteMenuItem', restaurant_id=item.restaurant_id, menu_id=item.id)}}" method="post">
+        <h3>Delete {{ restaurant.name }}?</h3>
+        <form action="{{ url_for('deleteRestaurant', restaurant_id=restaurant.id)}}" method="POST">
           <input type="submit" value="Delete">
+          <a href="{{url_for('showRestaurants')}}">Go Back</a>
         </form>
-        <a href="{{url_for('showMenu', restaurant_id=restaurant_id)}}">Go Back</a>
       </div>
     </div>
   </body>

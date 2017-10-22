@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Welcome!</h1>
+        <h2><a class="button" href="{{ url_for('newRestaurant')}}">Add New Restaurant</a></h2>
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+        <ul class="flash">
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+      {% endwith %}
+
+      <div class="restaurant-container">
+        {% if restaurants %}
+        {% for i in restaurants %}
+        <ul class="restaurant-item">
+          <li class="restaurant-title"><a href="{{ url_for('showMenu', restaurant_id=i.id)}}">{{i.name}}</a></li>
+          <li class="restaurant-buttons">
+            <a class="button" href="{{ url_for('editRestaurant', restaurant_id=i.id) }}">Edit</a>
+            <span> </span>
+            <a class="button" href="{{ url_for('deleteRestaurant', restaurant_id=i.id) }}">Delete</a>
+          </li>
+        </ul>
+        {% endfor %}
+        {% else %}
+        <ul>
+          <li>You currently have no restaurants</li>
+          <li><a class="button" href="{{ url_for('newRestaurant')}}">Add your first restaurant!</a></li>
+        </ul>
+        {% endif %}
+      </div>
+
+
+    </div>
+  </body>
+</html>

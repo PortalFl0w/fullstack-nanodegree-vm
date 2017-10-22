@@ -3,14 +3,28 @@
   <head>
     <meta charset="utf-8">
     <title>Edit Menu Item</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
   </head>
   <body>
-    <h1>Edit {{ item.name }}</h1>
-    <form action="{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id)}}" method="POST">
-      <label for="name">Name:</label>
-      <input type="text" name="name" value="{{ item.name }}">
-      <input type="submit" value="Edit">
-      <a href="{{url_for('restaurantMenu', restaurant_id=restaurant_id)}}">Go Back</a>
-    </form>
+    <div class="container">
+      <div class="header">
+        <h1>Edit {{ item.name }}</h1>
+      </div>
+      <div class="form-wrapper">
+        <form action="{{ url_for('editMenuItem', restaurant_id=restaurant_id, menu_id=menu_id)}}" method="post">
+          <p>Name: </p>
+          <input type="text" name="name" value="{{item.name}}">
+          <p>Price: </p>
+          <input type="text" name="price" value="{{item.price}}">
+          <p>Course: </p>
+          <input type="text" name="course" value="{{item.course}}">
+          <p>Description: </p>
+          <textarea name="description">{{item.description}}</textarea><br>
+          <input type="submit" value="Submit">
+          <a href="{{url_for('showMenu', restaurant_id=restaurant_id)}}">Cancel</a>
+        </form>
+      </div>
+    </div>
   </body>
 </html>
